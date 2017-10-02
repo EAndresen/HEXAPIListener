@@ -3,6 +3,7 @@ package com.company;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Main {
 
@@ -11,10 +12,12 @@ public class Main {
             try {
                 ServerSocket serverSocket = new ServerSocket(5000);
                 Socket socket = serverSocket.accept();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                String content = bufferedReader.readLine();
+                InputStream stream = socket.getInputStream();
+                Scanner reader = new Scanner(stream);
 
-                System.out.println(content);
+                    while (reader.hasNextLine()) {
+                        System.out.println(reader.nextLine());
+                    }
             } catch (IOException e) {
                 e.printStackTrace();
             }
