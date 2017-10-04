@@ -8,13 +8,12 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
         ServerSocket serverSocket = new ServerSocket(5000);
 
         while (true) {
-            Runnable serverTask = () -> {
+            Socket socket = serverSocket.accept();
+
                 try {
-                    Socket socket = serverSocket.accept();
                     InputStream stream = socket.getInputStream();
                     Scanner reader = new Scanner(stream);
 
@@ -24,8 +23,6 @@ public class Main {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            };
-        serverTask.run();
         }
     }
 }
